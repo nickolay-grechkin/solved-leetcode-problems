@@ -6,20 +6,20 @@ def preorderTraversalRecursion(root):
 
     def function(root):
         if (not root):
-            return
-        
-        node_values.append(root.val);
+            return 
 
-        function(root.left);
-        function(root.right);
+        node_values.append(root.val)
+
+        function(root.left)
+        function(root.right)
 
         return;
 
-    function(root);
+    function(root)
 
     return node_values
 
-binaryTree = lctk.binaryTree([1, 5, 6, 7, 4, None, 3, None, None, 2, 9, 8])
+binaryTree = lctk.binaryTree(["F", "B", "G", "A", "D", None, "I", None, None, "C", "E", "H"])
 
 def preorderTraversalIterative(root):
     stack = [root]
@@ -29,11 +29,12 @@ def preorderTraversalIterative(root):
         node = stack.pop()
 
         if (node):
+            stack.append(node.right)
+
             node_values.append(node.val)
             
-            stack.append(node.right)
             stack.append(node.left)
 
-    return node_values;
+    return node_values
 
-print(preorderTraversalIterative(binaryTree))
+print(preorderTraversalRecursion(binaryTree))
