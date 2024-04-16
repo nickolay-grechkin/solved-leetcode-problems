@@ -16,20 +16,16 @@ def postorderTraversalRecursion(root):
     return node_values
 
 def postorderTraversalIterative(root):
-    node_values, visited, stack = [], [], [root]
+    node_values, stack = [], [(root, False)]
 
     while stack:
-        node = stack.pop()
+        node, visited = stack.pop()
 
-        if node not in visited:
-            if node.right or node.left:
-                stack.append(node)
-            if node.right:
-                node.append(node.right)
-            if node.left:
-                node.append(node.left)
-            if not node.left and not node.right:
-                node_values.append(node.val)
-        else:
+        if visited:
             node_values.append(node.val)
-        visited.append(node)
+        else:
+            stack.append((node, True))
+            stack.append((node.right, False))
+            stack.append((node.left, False))
+
+    return node_values

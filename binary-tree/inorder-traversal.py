@@ -18,31 +18,24 @@ def inorderTraversalRecursion(root):
     return node_values;
 
 binaryTree = lctk.binaryTree(["F","B","G", "A", "D", None, "I", None, None, "C", "E", "H"])
+res, stack = [], [(binaryTree, False)]
+
+print(stack)
 # binaryTree = lctk.binaryTree([1])
 
-def inorderTraversal(root):
-    if not root:
-        return []
-    
-    stack, visited, node_values = [root], [], []
+def inorderTraversalIterative(root):
+    node_values, stack = [], [(root, False)]
 
     while stack:
-        node = stack.pop()
-            
-        if node.right and not node in visited:
-            stack.append(node.right)
-        if node.left:
-            if node in visited:
+        node, visited = stack.pop()
+        
+        if node:
+            if visited:
                 node_values.append(node.val)
             else:
-                stack.append(node)
-                stack.append(node.left)
-        if not node.left:
-            node_values.append(node.val)
-
-        visited.append(node) 
-        
-
+                stack.append((node.right, False))
+                stack.append((node, True))
+                stack.append((node.left, False))
     return node_values
 
 print(inorderTraversalIterative(binaryTree))
